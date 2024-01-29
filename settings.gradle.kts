@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "PROGRAPHY_ANDROID"
 include(":app")
- 
+include(":core:designsystem")
