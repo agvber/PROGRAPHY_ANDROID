@@ -16,4 +16,10 @@ class NetworkTest {
         printPrettyJson(networkDataSource.getPhotos())
     }
 
+    @Test
+    fun getRandomPhotos() = runTest(testDispatcher) {
+        val response = networkDataSource.getRandomPhotos(count = 30)
+        printPrettyJson(response)
+    }
+
 }
