@@ -4,6 +4,7 @@ import com.agvber.network.NetworkDataSource
 import com.agvber.network.model.NetworkContentFilter
 import com.agvber.network.model.NetworkOrderBy
 import com.agvber.network.model.NetworkOrientation
+import com.agvber.network.model.PhotoDetailResponse
 import com.agvber.network.model.PhotosResponse
 import com.agvber.network.model.RandomPhotosResponse
 import okhttp3.Call
@@ -48,5 +49,9 @@ class RetrofitService @Inject constructor(
             contentFilter = contentFilter.params,
             count = count
         )
+    }
+
+    override suspend fun getPhotoDetail(id: String): PhotoDetailResponse {
+        return networkService.getPhotoDetail(id = id)
     }
 }

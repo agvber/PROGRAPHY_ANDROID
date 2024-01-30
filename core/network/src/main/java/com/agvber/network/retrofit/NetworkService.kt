@@ -1,9 +1,11 @@
 package com.agvber.network.retrofit
 
 import androidx.annotation.IntRange
+import com.agvber.network.model.PhotoDetailResponse
 import com.agvber.network.model.PhotosResponse
 import com.agvber.network.model.RandomPhotosResponse
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 internal interface NetworkService {
@@ -25,4 +27,9 @@ internal interface NetworkService {
         @Query("content_filter") contentFilter: String = "low", // Limit results by content safety. Default: low. Valid values are low and high.
         @Query("count") @IntRange(1, 30) count: Int = 1, // The number of photos to return. (Default: 1; max: 30)
     ): List<RandomPhotosResponse>
+
+    @GET("/photos/{id}")
+    suspend fun getPhotoDetail(
+        @Path(value = "id") id: String
+    ): PhotoDetailResponse
 }
