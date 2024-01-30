@@ -22,4 +22,12 @@ class NetworkTest {
         printPrettyJson(response)
     }
 
+    @Test
+    fun getPhotoDetail() = runTest(testDispatcher) {
+        networkDataSource.getRandomPhotos(count = 5).forEach {
+            val response = networkDataSource.getPhotoDetail(id = it.id)
+            printPrettyJson(response)
+        }
+    }
+
 }
