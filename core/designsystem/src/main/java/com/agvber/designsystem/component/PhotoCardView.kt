@@ -36,10 +36,8 @@ fun PhotoCardView(
 ) {
     Box(
         modifier = modifier
-            .background(
-                color = Gray20,
-                shape = RoundedCornerShape(10.dp)
-            ),
+            .background(color = Gray20, RoundedCornerShape(10.dp))
+            .clip(RoundedCornerShape(10.dp)),
         content = content
     ) 
 }
