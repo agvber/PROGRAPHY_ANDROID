@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -33,6 +35,21 @@ android {
 }
 
 dependencies {
+
+    implementation(libs.moshi.kotlin)
+    implementation(libs.kotlinx.coroutines.android)
+
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
+    androidTestImplementation(libs.androidx.room.testing)
+
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+    androidTestImplementation(libs.hilt.android.test)
+
+    androidTestImplementation(libs.kotlinx.coroutines.test)
 
     implementation(libs.androidx.core)
     testImplementation(libs.junit)
