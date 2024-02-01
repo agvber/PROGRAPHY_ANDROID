@@ -17,3 +17,4 @@ rootProject.name = "PROGRAPHY_ANDROID"
 include(":app")
 include(":core:designsystem")
 include(":core:network")
+include(":core:database")
