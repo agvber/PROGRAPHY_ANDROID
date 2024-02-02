@@ -7,6 +7,8 @@ import com.agvber.network.model.NetworkOrientation
 import com.agvber.network.model.PhotoDetailResponse
 import com.agvber.network.model.PhotosResponse
 import com.agvber.network.model.RandomPhotosResponse
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -19,10 +21,15 @@ class RetrofitService @Inject constructor(
     okhttpCallFactory: Call.Factory
 ): NetworkDataSource {
 
+    private val moshi = Moshi.Builder().run {
+        add(KotlinJsonAdapterFactory())
+        build()
+    }
+
     private val retrofit = Retrofit.Builder().run {
         baseUrl("https://api.unsplash.com")
         callFactory(okhttpCallFactory)
-        addConverterFactory(MoshiConverterFactory.create())
+        addConverterFactory(MoshiConverterFactory.create(moshi))
         build()
     }
 

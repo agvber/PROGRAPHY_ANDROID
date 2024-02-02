@@ -42,6 +42,7 @@ dependencies {
     implementation(libs.okhttp.logging)
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.moshi)
+    implementation(libs.moshi.kotlin)
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
