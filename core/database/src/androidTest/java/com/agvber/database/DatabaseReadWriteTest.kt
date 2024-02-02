@@ -1,5 +1,6 @@
 package com.agvber.database
 
+import android.util.Log
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.agvber.database.dao.BookmarkDao
@@ -70,6 +71,14 @@ class DatabaseReadWriteTest {
         bookmarkDao.deleteBookmark("abjd-nw")
         val result = bookmarkDao.getBookmarkEntity().first()
         Assert.assertTrue(result.isEmpty())
+    }
+
+    @Test
+    fun hasQuery() = runTest(testDispatcher) {
+        bookmarkDatReadWriteTest()
+        Assert.assertTrue(bookmarkDao.hasQuery("abjd-nw"))
+        deleteBookmarkTest()
+        Assert.assertTrue(!bookmarkDao.hasQuery("abjd-nw"))
     }
 
 }
