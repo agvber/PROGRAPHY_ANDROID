@@ -1,9 +1,8 @@
 package com.agvber.network.model
 
-
 import com.squareup.moshi.Json
 
-data class PhotoDetailResponse(
+data class PhotosResponse(
     @Json(name = "id")
     val id: String,
     @Json(name = "slug")
@@ -26,6 +25,8 @@ data class PhotoDetailResponse(
     val description: String?,
     @Json(name = "alt_description")
     val altDescription: String?,
+//    @Json(name = "breadcrumbs")
+//    val breadcrumbs: List<Any>,
     @Json(name = "urls")
     val urls: Urls,
     @Json(name = "links")
@@ -34,18 +35,14 @@ data class PhotoDetailResponse(
     val likes: Int,
     @Json(name = "liked_by_user")
     val likedByUser: Boolean,
+//        @Json(name = "current_user_collections")
+//        val currentUserCollections: List<Any>,
+//        @Json(name = "sponsorship")
+//        val sponsorship: Any?,
+//    @Json(name = "topic_submissions")
+//    val topicSubmissions: TopicSubmissions,
     @Json(name = "user")
-    val user: User,
-    @Json(name = "exif")
-    val exif: Exif,
-    @Json(name = "location")
-    val location: Location,
-    @Json(name = "tags")
-    val tags: List<Tag>,
-    @Json(name = "views")
-    val views: Int,
-    @Json(name = "downloads")
-    val downloads: Int,
+    val user: User
 ) {
     data class Urls(
         @Json(name = "raw")
@@ -73,6 +70,43 @@ data class PhotoDetailResponse(
         val downloadLocation: String
     )
 
+//    data class TopicSubmissions(
+//        @Json(name = "film")
+//        val film: Film,
+//        @Json(name = "street-photography")
+//        val streetPhotography: StreetPhotography,
+//        @Json(name = "architecture-interior")
+//        val architectureInterior: ArchitectureInterior,
+//        @Json(name = "travel")
+//        val travel: Travel
+//    ) {
+//        data class Film(
+//            @Json(name = "status")
+//            val status: String,
+//            @Json(name = "approved_on")
+//            val approvedOn: String
+//        )
+//
+//        data class StreetPhotography(
+//            @Json(name = "status")
+//            val status: String,
+//            @Json(name = "approved_on")
+//            val approvedOn: String
+//        )
+//
+//        data class ArchitectureInterior(
+//            @Json(name = "status")
+//            val status: String
+//        )
+//
+//        data class Travel(
+//            @Json(name = "status")
+//            val status: String,
+//            @Json(name = "approved_on")
+//            val approvedOn: String
+//        )
+//    }
+
     data class User(
         @Json(name = "id")
         val id: String,
@@ -85,7 +119,7 @@ data class PhotoDetailResponse(
         @Json(name = "first_name")
         val firstName: String,
         @Json(name = "last_name")
-        val lastName: String?,
+        val lastName: String,
         @Json(name = "twitter_username")
         val twitterUsername: String?,
         @Json(name = "portfolio_url")
@@ -97,7 +131,7 @@ data class PhotoDetailResponse(
         @Json(name = "links")
         val links: Links,
         @Json(name = "profile_image")
-        val profileImage: ProfileImage,
+        val profileImage: ProfileImage?,
         @Json(name = "instagram_username")
         val instagramUsername: String?,
         @Json(name = "total_collections")
@@ -152,46 +186,4 @@ data class PhotoDetailResponse(
             val paypalEmail: String?
         )
     }
-
-    data class Exif(
-        @Json(name = "make")
-        val make: String?,
-        @Json(name = "model")
-        val model: String?,
-        @Json(name = "name")
-        val name: String?,
-        @Json(name = "exposure_time")
-        val exposureTime: String?,
-        @Json(name = "aperture")
-        val aperture: String?,
-        @Json(name = "focal_length")
-        val focalLength: String?,
-        @Json(name = "iso")
-        val iso: Int?
-    )
-
-    data class Location(
-        @Json(name = "name")
-        val name: String?,
-        @Json(name = "city")
-        val city: String?,
-        @Json(name = "country")
-        val country: String?,
-        @Json(name = "position")
-        val position: Position
-    ) {
-        data class Position(
-            @Json(name = "latitude")
-            val latitude: Double?,
-            @Json(name = "longitude")
-            val longitude: Double?
-        )
-    }
-
-    data class Tag(
-        @Json(name = "type")
-        val type: String,
-        @Json(name = "title")
-        val title: String,
-    )
 }
