@@ -36,6 +36,17 @@ android {
 
 dependencies {
 
+    implementation(project(":core:data"))
+    implementation(project(":core:model"))
+
+    implementation(libs.androidx.paging.runtime)
+    implementation(libs.androidx.paging.compose)
+    testImplementation(libs.androidx.paging.common)
+
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+    kspTest(libs.hilt.compiler)
+
     implementation(libs.androidx.core)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext)
