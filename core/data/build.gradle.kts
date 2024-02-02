@@ -36,6 +36,10 @@ android {
 
 dependencies {
 
+    implementation(project(":core:network"))
+    implementation(project(":core:database"))
+    implementation(project(":core:model"))
+
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     kspTest(libs.hilt.compiler)
