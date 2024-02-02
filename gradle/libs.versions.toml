@@ -18,6 +18,7 @@ coil2 = "2.5.0"
 room = "2.6.1"
 moshiKotlin = "1.15.0"
 org-jetbrains-kotlin-jvm = "1.9.0"
+paging3 = "3.2.1"
 
 [libraries]
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
@@ -53,7 +54,9 @@ androidx-room-runtime = { group = "androidx.room", name = "room-runtime", versio
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 androidx-room-testing = { group = "androidx.room", name = "room-testing", version.ref = "room" }
 androidx-room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
-
+androidx-paging-runtime = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging3" }
+androidx-paging-common = { group = "androidx.paging", name = "paging-common", version.ref = "paging3" }
+androidx-paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "paging3" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
