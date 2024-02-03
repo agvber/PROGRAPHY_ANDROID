@@ -22,12 +22,12 @@ import com.agvber.designsystem.theme.PROGRAPHY_ANDROID_Theme
 fun ItemTitleLayout(
     text: String,
     modifier: Modifier = Modifier
+        .fillMaxWidth()
+        .background(Color.White)
+        .padding(top = 10.dp, bottom = 9.dp, start = 20.dp, end = 20.dp)
 ) {
     Box(
         modifier = modifier
-            .fillMaxWidth()
-            .background(Color.White)
-            .padding(top = 10.dp, bottom = 9.dp, start = 20.dp, end = 20.dp)
     ) {
         Text(
             text = text,
