@@ -40,6 +40,7 @@ import com.agvber.designsystem.component.PrographyAppBar
 import com.agvber.designsystem.component.PrographyNavigationBar
 import com.agvber.designsystem.component.PrographyNavigationItem
 import com.agvber.designsystem.ignoreParentPadding
+import com.agvber.designsystem.nonReplyClick
 import com.agvber.designsystem.previewPlaceholder
 import com.agvber.designsystem.theme.PROGRAPHY_ANDROID_Theme
 import com.agvber.model.FakeModel
@@ -50,6 +51,7 @@ import kotlinx.coroutines.flow.flowOf
 @Composable
 fun HomeRoute(
     navigationItemOnChange: (PrographyNavigationItem) -> Unit,
+    itemClick: (String, String) -> Unit,
     homeViewModel: HomeViewModel = hiltViewModel(),
 ) {
     val bookmarkUiState by homeViewModel.bookmarkPhoto.collectAsStateWithLifecycle()
@@ -58,6 +60,7 @@ fun HomeRoute(
     Box {
         HomeScreen(
             navigationItemOnChange = navigationItemOnChange,
+            itemClick = itemClick,
             bookmarkUiState = bookmarkUiState,
             photos = photos
         )
@@ -67,6 +70,7 @@ fun HomeRoute(
 @Composable
 fun HomeScreen(
     navigationItemOnChange: (PrographyNavigationItem) -> Unit,
+    itemClick: (String, String) -> Unit,
     bookmarkUiState: BookmarkUiState,
     photos: LazyPagingItems<Photo>
 ) {
@@ -99,15 +103,23 @@ fun HomeScreen(
                 .background(Color.White)
         ) {
             if (bookmarkUiState.data.isNotEmpty()) {
-                bookmarkLayout(bookmarkUiState.data, rootLayoutPaddingPx)
+                bookmarkLayout(
+                    itemClick = { itemClick(it, "bookmark") },
+                    photos = bookmarkUiState.data,
+                    rootLayoutPaddingPx = rootLayoutPaddingPx
+                )
             }
-            photoListLayout(photos)
+            photoListLayout(
+                itemClick = { itemClick(it, "network") },
+                photos = photos
+            )
         }
     }
 }
 
 
 fun LazyStaggeredGridScope.bookmarkLayout(
+    itemClick: (String) -> Unit,
     photos: List<Photo>,
     rootLayoutPaddingPx: Int
 ) {
@@ -131,7 +143,9 @@ fun LazyStaggeredGridScope.bookmarkLayout(
                     items = photos,
                     key = { it.id }
                 ) {
-                    PhotoCardView {
+                    PhotoCardView(
+                        modifier = Modifier.nonReplyClick { itemClick(it.id) }
+                    ) {
                         AsyncImage(
                             model = it.url.thumb,
                             contentDescription = null,
@@ -148,7 +162,10 @@ fun LazyStaggeredGridScope.bookmarkLayout(
 }
 
 
-fun LazyStaggeredGridScope.photoListLayout(photos: LazyPagingItems<Photo>) {
+fun LazyStaggeredGridScope.photoListLayout(
+    itemClick: (String) -> Unit,
+    photos: LazyPagingItems<Photo>
+) {
     item(
         span = StaggeredGridItemSpan.FullLine
     ) {
@@ -167,7 +184,9 @@ fun LazyStaggeredGridScope.photoListLayout(photos: LazyPagingItems<Photo>) {
     ) {
         PhotoCardView(
             text = photos[it]?.title ?: "",
-            modifier = Modifier.padding(bottom = 10.dp)
+            modifier = Modifier
+                .padding(bottom = 10.dp)
+                .nonReplyClick { photos[it]?.let { itemClick(it.id) } }
         ) {
             AsyncImage(
                 model = photos[it]?.url?.thumb,
@@ -186,6 +205,7 @@ fun HomeScreenPreview() {
     PROGRAPHY_ANDROID_Theme {
         HomeScreen(
             navigationItemOnChange = { },
+            itemClick = { _, _ -> },
             bookmarkUiState = BookmarkUiState.Success(FakeModel.photos),
             photos = flowOf(PagingData.from(FakeModel.photos)).collectAsLazyPagingItems()
         )
