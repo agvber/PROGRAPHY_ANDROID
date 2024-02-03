@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 interface BookmarkRepository {
 
-    suspend fun getBookmarkPhotos(
+    fun getBookmarkPhotos(
         reverse: Boolean = false,
         limit: Int = -1
     ): Flow<List<Photo>>
@@ -26,7 +26,7 @@ interface BookmarkRepository {
 internal class BookmarkRepositoryImpl @Inject constructor(
     private val bookmarkDao: BookmarkDao
 ): BookmarkRepository {
-    override suspend fun getBookmarkPhotos(
+    override fun getBookmarkPhotos(
         reverse: Boolean,
         limit: Int
     ): Flow<List<Photo>> {
