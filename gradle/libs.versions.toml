@@ -19,6 +19,7 @@ room = "2.6.1"
 moshiKotlin = "1.15.0"
 org-jetbrains-kotlin-jvm = "1.9.0"
 paging3 = "3.2.1"
+androidxNavigation = "2.7.6"
 
 [libraries]
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
@@ -28,6 +29,7 @@ androidx-lifecycle = { group = "androidx.lifecycle", name = "lifecycle-runtime-k
 androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 androidx-test-ext = { group = "androidx.test.ext", name = "junit", version.ref = "androidxTestExt" }
 androidx-test-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidx-test-espresso" }
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidComposeBom" }
 androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }

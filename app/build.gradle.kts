@@ -54,6 +54,11 @@ android {
 dependencies {
 
     implementation(project(":core:designsystem"))
+    implementation(project(":feature:home"))
+    implementation(project(":feature:randomphoto"))
+    implementation(project(":feature:photodetail"))
+
+    implementation(libs.androidx.navigation.compose)
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
