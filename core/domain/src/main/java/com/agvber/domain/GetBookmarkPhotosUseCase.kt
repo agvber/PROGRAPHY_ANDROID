@@ -8,8 +8,7 @@ import javax.inject.Inject
 class GetBookmarkPhotosUseCase @Inject constructor(
     private val bookmarkRepository: BookmarkRepository
 ) {
-
-    suspend operator fun invoke(
+    operator fun invoke(
         reverse: Boolean = false,
         limit: Int = -1
     ): Flow<List<Photo>> {
