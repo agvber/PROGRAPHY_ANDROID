@@ -122,7 +122,8 @@ fun RandomPhotoCardView(
                 Icon(
                     painter = painterResource(id = R.drawable.ic_bookmark_black),
                     contentDescription = null,
-                    tint = Color.White
+                    tint = Color.White,
+                    modifier = Modifier.fillMaxSize()
                 )
             }
             Box(
