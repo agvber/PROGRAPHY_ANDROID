@@ -8,11 +8,11 @@ data class PhotosResponse(
     @Json(name = "slug")
     val slug: String,
     @Json(name = "created_at")
-    val createdAt: String,
+    val createdAt: String?,
     @Json(name = "updated_at")
-    val updatedAt: String,
+    val updatedAt: String?,
     @Json(name = "promoted_at")
-    val promotedAt: String,
+    val promotedAt: String?,
     @Json(name = "width")
     val width: Int,
     @Json(name = "height")
@@ -25,8 +25,6 @@ data class PhotosResponse(
     val description: String?,
     @Json(name = "alt_description")
     val altDescription: String?,
-//    @Json(name = "breadcrumbs")
-//    val breadcrumbs: List<Any>,
     @Json(name = "urls")
     val urls: Urls,
     @Json(name = "links")
@@ -35,12 +33,6 @@ data class PhotosResponse(
     val likes: Int,
     @Json(name = "liked_by_user")
     val likedByUser: Boolean,
-//        @Json(name = "current_user_collections")
-//        val currentUserCollections: List<Any>,
-//        @Json(name = "sponsorship")
-//        val sponsorship: Any?,
-//    @Json(name = "topic_submissions")
-//    val topicSubmissions: TopicSubmissions,
     @Json(name = "user")
     val user: User
 ) {
@@ -70,43 +62,6 @@ data class PhotosResponse(
         val downloadLocation: String
     )
 
-//    data class TopicSubmissions(
-//        @Json(name = "film")
-//        val film: Film,
-//        @Json(name = "street-photography")
-//        val streetPhotography: StreetPhotography,
-//        @Json(name = "architecture-interior")
-//        val architectureInterior: ArchitectureInterior,
-//        @Json(name = "travel")
-//        val travel: Travel
-//    ) {
-//        data class Film(
-//            @Json(name = "status")
-//            val status: String,
-//            @Json(name = "approved_on")
-//            val approvedOn: String
-//        )
-//
-//        data class StreetPhotography(
-//            @Json(name = "status")
-//            val status: String,
-//            @Json(name = "approved_on")
-//            val approvedOn: String
-//        )
-//
-//        data class ArchitectureInterior(
-//            @Json(name = "status")
-//            val status: String
-//        )
-//
-//        data class Travel(
-//            @Json(name = "status")
-//            val status: String,
-//            @Json(name = "approved_on")
-//            val approvedOn: String
-//        )
-//    }
-
     data class User(
         @Json(name = "id")
         val id: String,
@@ -117,9 +72,9 @@ data class PhotosResponse(
         @Json(name = "name")
         val name: String,
         @Json(name = "first_name")
-        val firstName: String,
+        val firstName: String?,
         @Json(name = "last_name")
-        val lastName: String,
+        val lastName: String?,
         @Json(name = "twitter_username")
         val twitterUsername: String?,
         @Json(name = "portfolio_url")
