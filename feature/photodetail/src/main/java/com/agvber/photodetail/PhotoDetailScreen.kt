@@ -213,7 +213,7 @@ fun PhotoDetailFooter(
         Row(
             modifier = Modifier.padding(top = 8.dp)
         ) {
-            tags.forEach {
+            tags.subList(0, 3).forEach {
                 Text(
                     text = "#${it}",
                     fontFamily = FontFamily(Font(com.agvber.designsystem.R.font.pretendard_medium)),
