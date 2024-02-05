@@ -1,5 +1,6 @@
 package com.agvber.domain
 
+import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingSource
@@ -9,7 +10,7 @@ import com.agvber.model.Photo
 import javax.inject.Inject
 
 class GetPhotosUseCase @Inject constructor(
-    private val photoRepository: PhotoRepository
+    private val photoRepository: PhotoRepository,
 ) {
 
     operator fun invoke(
@@ -38,12 +39,14 @@ class GetPhotosUseCase @Inject constructor(
                 LoadResult.Page(
                     data = when (photoRequest) {
                         PhotoRequest.PHOTO -> photoRepository.getPhotos(page, 10)
-                        PhotoRequest.RANDOM -> photoRepository.getRandomPhotos(3)
+                        PhotoRequest.RANDOM -> photoRepository.getRandomPhotos(10)
                     },
                     prevKey = if (page == 1) null else page -1,
                     nextKey = page + 1
                 )
             } catch (exception: Exception) {
+                Log.d("PhotoPagingSourceError", "")
+                exception.printStackTrace()
                 LoadResult.Error(exception)
             }
         }
