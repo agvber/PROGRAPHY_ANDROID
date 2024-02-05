@@ -28,7 +28,7 @@ internal class PhotoRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getRandomPhotos(pageSize: Int): List<Photo> {
-        return networkDataSource.getRandomPhotos()
+        return networkDataSource.getRandomPhotos(count = pageSize)
             .filter { !bookmarkDao.hasQuery(it.id) }
             .map { it.asExternalModel() }
     }
