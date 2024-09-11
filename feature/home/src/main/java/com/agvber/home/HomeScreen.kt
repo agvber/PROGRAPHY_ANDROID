@@ -1,9 +1,9 @@
 package com.agvber.home
 
+import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -34,18 +35,19 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
 import coil.compose.AsyncImage
-import com.agvber.designsystem.component.ItemTitleLayout
-import com.agvber.designsystem.component.PhotoCardView
-import com.agvber.designsystem.component.PrographyAppBar
-import com.agvber.designsystem.component.PrographyNavigationBar
-import com.agvber.designsystem.component.PrographyNavigationItem
-import com.agvber.designsystem.ignoreParentPadding
-import com.agvber.designsystem.nonReplyClick
-import com.agvber.designsystem.previewPlaceholder
-import com.agvber.designsystem.theme.PROGRAPHY_ANDROID_Theme
-import com.agvber.model.FakeModel
-import com.agvber.model.Photo
-import com.agvber.ui.SkeletonLoadingLayout
+import com.agvber.core.designsystem.component.ItemTitleLayout
+import com.agvber.core.designsystem.component.PhotoCardView
+import com.agvber.core.designsystem.component.PrographyAppBar
+import com.agvber.core.designsystem.component.PrographyNavigationBar
+import com.agvber.core.designsystem.component.PrographyNavigationItem
+import com.agvber.core.designsystem.ignoreParentPadding
+import com.agvber.core.designsystem.nonReplyClick
+import com.agvber.core.designsystem.previewPlaceholder
+import com.agvber.core.designsystem.theme.PROGRAPHY_ANDROID_Theme
+import com.agvber.core.domain.model.FakeModel
+import com.agvber.core.domain.model.Photo
+import com.agvber.core.ui.SkeletonLoadingLayout
+import com.agvber.core.designsystem.R
 import kotlinx.coroutines.flow.flowOf
 
 @Composable
@@ -55,16 +57,21 @@ fun HomeRoute(
     homeViewModel: HomeViewModel = hiltViewModel(),
 ) {
     val bookmarkUiState by homeViewModel.bookmarkPhoto.collectAsStateWithLifecycle()
-    val photos = homeViewModel.photos.collectAsLazyPagingItems()
+    val photos = homeViewModel.photos?.collectAsLazyPagingItems()
 
-    Box {
-        HomeScreen(
-            navigationItemOnChange = navigationItemOnChange,
-            itemClick = itemClick,
-            bookmarkUiState = bookmarkUiState,
-            photos = photos
-        )
+    val context = LocalContext.current
+
+    if (photos == null) {
+        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+        return
     }
+
+    HomeScreen(
+        navigationItemOnChange = navigationItemOnChange,
+        itemClick = itemClick,
+        bookmarkUiState = bookmarkUiState,
+        photos = photos
+    )
 }
 
 @Composable
@@ -150,7 +157,7 @@ fun LazyStaggeredGridScope.bookmarkLayout(
                             model = it.url.thumb,
                             contentDescription = null,
                             contentScale = ContentScale.FillHeight,
-                            placeholder = previewPlaceholder(id = com.agvber.designsystem.R.drawable.photo_test_item),
+                            placeholder = previewPlaceholder(id = R.drawable.photo_test_item),
                             modifier = Modifier
                                 .height(128.dp)
                         )
@@ -192,7 +199,7 @@ fun LazyStaggeredGridScope.photoListLayout(
                 model = photos[it]?.url?.thumb,
                 contentDescription = null,
                 contentScale = ContentScale.FillWidth,
-                placeholder = previewPlaceholder(id = com.agvber.designsystem.R.drawable.photo_test_item),
+                placeholder = previewPlaceholder(id = R.drawable.photo_test_item),
                 modifier = Modifier.fillMaxSize()
             )
         }

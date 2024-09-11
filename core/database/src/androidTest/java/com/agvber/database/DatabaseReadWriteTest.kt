@@ -1,11 +1,11 @@
 package com.agvber.database
 
-import android.util.Log
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.agvber.database.dao.BookmarkDao
-import com.agvber.database.di.DatabaseModule.providesAppDatabase
-import com.agvber.database.model.BookmarkEntity
+import com.agvber.core.database.AppDatabase
+import com.agvber.core.database.dao.BookmarkDao
+import com.agvber.core.database.di.DatabaseModule.providesAppDatabase
+import com.agvber.core.database.model.BookmarkEntity
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest

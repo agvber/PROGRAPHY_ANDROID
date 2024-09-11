@@ -1,5 +1,6 @@
 package com.agvber.randomphoto
 
+import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -10,19 +11,20 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.agvber.designsystem.component.PrographyAppBar
-import com.agvber.designsystem.component.PrographyNavigationBar
-import com.agvber.designsystem.component.PrographyNavigationItem
-import com.agvber.designsystem.component.RandomPhotoCardView
-import com.agvber.designsystem.theme.PROGRAPHY_ANDROID_Theme
-import com.agvber.model.FakeModel
-import com.agvber.model.Photo
+import com.agvber.core.designsystem.component.PrographyAppBar
+import com.agvber.core.designsystem.component.PrographyNavigationBar
+import com.agvber.core.designsystem.component.PrographyNavigationItem
+import com.agvber.core.designsystem.component.RandomPhotoCardView
+import com.agvber.core.designsystem.theme.PROGRAPHY_ANDROID_Theme
+import com.agvber.core.domain.model.FakeModel
+import com.agvber.core.domain.model.Photo
 import kotlinx.coroutines.flow.flowOf
 
 @Composable
@@ -31,7 +33,15 @@ fun RandomPhotoRoute(
     photoInfoButtonOnClick: (String) -> Unit,
     randomPhotoViewModel: RandomPhotoViewModel = hiltViewModel(),
 ) {
-    val randomPhoto = randomPhotoViewModel.randomPhoto.collectAsLazyPagingItems()
+    val randomPhoto = randomPhotoViewModel.randomPhoto?.collectAsLazyPagingItems()
+
+    val context = LocalContext.current
+
+    if (randomPhoto == null) {
+        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+        return
+    }
+
     RandomPhotoScreen(
         navigationItemOnChange = navigationItemOnChange,
         bookmarkOnRequest = { randomPhotoViewModel.addBookmark(it.id) },
@@ -69,7 +79,7 @@ fun RandomPhotoScreen(
             state = pagerState,
             pageSpacing = 8.dp,
             contentPadding = PaddingValues(horizontal = 24.dp),
-        ) {page ->
+        ) { page ->
             RandomPhotoCardView(
                 bookmarkOnRequest = {
                     randomPhoto[page]?.let { bookmarkOnRequest(it) }

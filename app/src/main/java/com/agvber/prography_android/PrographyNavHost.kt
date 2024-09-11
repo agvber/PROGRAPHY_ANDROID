@@ -3,7 +3,7 @@ package com.agvber.prography_android
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.agvber.designsystem.component.PrographyNavigationItem
+import com.agvber.core.designsystem.component.PrographyNavigationItem
 import com.agvber.home.addHomeScreen
 import com.agvber.home.homeRoute
 import com.agvber.home.navigateToHomeScreen

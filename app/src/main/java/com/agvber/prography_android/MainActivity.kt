@@ -3,7 +3,7 @@ package com.agvber.prography_android
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.agvber.designsystem.theme.PROGRAPHY_ANDROID_Theme
+import com.agvber.core.designsystem.theme.PROGRAPHY_ANDROID_Theme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

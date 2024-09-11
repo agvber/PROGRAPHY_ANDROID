@@ -35,10 +35,10 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
-import com.agvber.designsystem.nonReplyClick
-import com.agvber.designsystem.theme.Gray30
-import com.agvber.designsystem.theme.PROGRAPHY_ANDROID_Theme
-import com.agvber.model.FakeModel
+import com.agvber.core.designsystem.nonReplyClick
+import com.agvber.core.designsystem.theme.Gray30
+import com.agvber.core.designsystem.theme.PROGRAPHY_ANDROID_Theme
+import com.agvber.core.domain.model.FakeModel
 
 @Composable
 fun PhotoDetailRoute(
@@ -48,13 +48,13 @@ fun PhotoDetailRoute(
     val photoDetailUiState by photoDetailViewModel.photoDetail.collectAsStateWithLifecycle()
     PhotoDetailScreen(
         onBackRequest = onBackRequest,
-        downloadButtonClick = {  },
+        downloadButtonClick = { },
         bookmarkButtonClick = {
-                              if (it) {
-                                  photoDetailViewModel.addBookmark()
-                              } else {
-                                  photoDetailViewModel.deleteBookmark()
-                              }
+            if (it) {
+                photoDetailViewModel.addBookmark()
+            } else {
+                photoDetailViewModel.deleteBookmark()
+            }
         },
         photoDetailUiState = photoDetailUiState
     )
@@ -98,7 +98,7 @@ fun PhotoDetailScreen(
                 model = photoDetailUiState.data.url.regular,
                 contentDescription = null,
                 contentScale = ContentScale.FillWidth,
-                placeholder = painterResource(id = com.agvber.designsystem.R.drawable.photo_test_item),
+                placeholder = painterResource(id = com.agvber.core.designsystem.R.drawable.photo_test_item),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 12.dp)
@@ -113,7 +113,7 @@ fun PhotoDetailScreen(
             )
         }
     }
-    
+
 }
 
 @Composable
@@ -143,13 +143,13 @@ fun PhotoDetailHeader(
                     .nonReplyClick { closeButtonClick() }
             ) {
                 Icon(
-                    painter = painterResource(id = com.agvber.designsystem.R.drawable.ic_close_black),
+                    painter = painterResource(id = com.agvber.core.designsystem.R.drawable.ic_close_black),
                     contentDescription = null
                 )
             }
             Text(
                 text = userName,
-                fontFamily = FontFamily(Font(com.agvber.designsystem.R.font.pretendard_bold)),
+                fontFamily = FontFamily(Font(com.agvber.core.designsystem.R.font.pretendard_bold)),
                 fontSize = 20.sp,
                 color = Color.White,
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp)
@@ -159,7 +159,7 @@ fun PhotoDetailHeader(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
-                painter = painterResource(id = com.agvber.designsystem.R.drawable.ic_download),
+                painter = painterResource(id = com.agvber.core.designsystem.R.drawable.ic_download),
                 contentDescription = null,
                 tint = Color.White,
                 modifier = Modifier
@@ -170,7 +170,7 @@ fun PhotoDetailHeader(
                 targetValue = if (isBookmarked) 1f else .3f
             )
             Icon(
-                painter = painterResource(id = com.agvber.designsystem.R.drawable.ic_bookmark_black),
+                painter = painterResource(id = com.agvber.core.designsystem.R.drawable.ic_bookmark_black),
                 contentDescription = null,
                 tint = Color.White,
                 modifier = Modifier
@@ -197,13 +197,13 @@ fun PhotoDetailFooter(
     ) {
         Text(
             text = title,
-            fontFamily = FontFamily(Font(com.agvber.designsystem.R.font.pretendard_bold)),
+            fontFamily = FontFamily(Font(com.agvber.core.designsystem.R.font.pretendard_bold)),
             fontSize = 20.sp,
             color = Color.White
         )
         Text(
             text = description,
-            fontFamily = FontFamily(Font(com.agvber.designsystem.R.font.pretendard_medium)),
+            fontFamily = FontFamily(Font(com.agvber.core.designsystem.R.font.pretendard_medium)),
             fontSize = 15.sp,
             color = Color.White,
             maxLines = 2,
@@ -216,7 +216,7 @@ fun PhotoDetailFooter(
             tags.subList(0, 3).forEach {
                 Text(
                     text = "#${it}",
-                    fontFamily = FontFamily(Font(com.agvber.designsystem.R.font.pretendard_medium)),
+                    fontFamily = FontFamily(Font(com.agvber.core.designsystem.R.font.pretendard_medium)),
                     fontSize = 15.sp,
                     color = Color.White
                 )
@@ -230,7 +230,7 @@ fun PhotoDetailFooter(
 fun PhotoDetailHeaderPreview() {
     PROGRAPHY_ANDROID_Theme {
         PhotoDetailHeader(
-            closeButtonClick = {  },
+            closeButtonClick = { },
             downloadButtonClick = { },
             bookmarkButtonClick = { },
             userName = "UserName",
@@ -246,7 +246,7 @@ fun PhotoDetailFooterPreview() {
         PhotoDetailFooter(
             title = "title",
             description = "description\ndescription은 최대 2줄",
-            tags = listOf("tag","tag","tag","tag","tag")
+            tags = listOf("tag", "tag", "tag", "tag", "tag")
         )
     }
 }
