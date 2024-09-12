@@ -34,7 +34,7 @@ class PhotoRepository @Inject constructor(
             initialKey = 1
         ) {
             PhotoPagingSource { params ->
-                networkDataSource.getRandomPhotos()
+                networkDataSource.getRandomPhotos(count = params.loadSize)
                     .filter { !bookmarkDao.hasQuery(it.id) }
             }
         }
